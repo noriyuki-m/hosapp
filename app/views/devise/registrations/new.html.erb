@@ -1,0 +1,62 @@
+
+
+
+ <div class='signinPage'>
+  <div class='container'>
+    <div class='userIcon'>
+
+<div class="sinupPage">
+  <%# <header class="header">
+    <div>アカウントを作成</div>
+  </header> %>
+  <div class='container'>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class:"mt-5" }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <label>Eメールアドレス</label>
+        <%= f.email_field :email, class: "form-control", placeholder: "emailを入力してください" ,autocomplete: "email" %>
+      </div>
+
+      <div class="form-group">
+        <label>パスワード</label>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %>文字以上入力してください)</em>
+        <% end %><br />
+        <%= f.password_field :password, class: "form-control", placeholder:"パスワードを入力してください", autocomplete: "off" %>
+      </div>
+
+      <div class="form-group">
+        <label>確認用パスワード</label>
+        <%= f.password_field :password_confirmation, class:"form-control", placeholder: "パスワードを再度入力してください", autocomplete: "off" %>
+      </div>
+
+      <div class="form-group text-center sign-up-button">
+        <%= f.submit "登録する", class: "loginBtn" %>
+      </div>
+
+
+
+
+
+    </div>
+
+    <div class="guestlogin">
+      <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, {method: :post, class: 'guestloginBtn'} %>
+
+    </div>
+
+  </div>
+</div>
+
+        
+  
+<%# <%= render "devise/shared/links" %>
+      </div>
+
+
+
+
+    <% end %>
+  </div>
+</div>

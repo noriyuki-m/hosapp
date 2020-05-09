@@ -1,0 +1,186 @@
+<% if user_signed_in? %>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    
+    <%= link_to "ログアウトする", destroy_user_session_path, { method: :delete, class: "btn btn-outline-secondary"} %>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/items/new"><i class="far fa-file-alt"></i> 投稿する<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/items/show"><i class="fas fa-map-marker-alt"></i> マップから探す <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/items" tabindex="-1" aria-disabled="true"><i class="far fa-list-alt"></i> 投稿一覧から探す</a>
+          </ul>
+      </div>
+    </nav>
+  </header>
+
+
+
+
+
+<div class="top-wrapper">
+<div class="top-wrapper-image">
+<h2>文京区にお住まいのペットと暮らしている方への情報を提供しています</h2>
+<h2>ペット（犬/猫）における新型コロナウイルス感染症に対する情報(参考サイト)</h2>
+<%# <hr color="black"> %>
+
+<h3>☆日本語のページのリンク</h3>
+<ul>
+<li><a class="" href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/doubutsu_qa__00001.html#Q1">厚生労働省：動物を飼育する方向けＱ＆A</a></li>
+<li><a class="" href="https://www.tvma.or.jp/public/2020/04/post-66.html">東京都獣医師会：飼い主さんに向けて（新型コロナウイルスQ&A）</a></li>
+<li><a class="" href="https://prtimes.jp/main/html/rd/p/000000033.000028421.html">アニコム：コロナ感染者のペットを無償でお預かり</a></li>
+</ul>
+<h3>☆英語のページのリンク (Useful Sites in English)</h3>
+<ul>
+<li><a class="" href="https://www.wormsandgermsblog.com/">Worms & Germs Blog</a>　Update Everyday!</li>
+<li><a class="" href="http://www.abcdcatsvets.org/">European Advisory Board on Cat Diseases (ABCD)</a>　Cat Info!</li>
+</ul>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="service-list" id="service">
+ <h2>投稿された動物病院一覧</h2> 
+
+  <!-- スマホ画面での順番を変更するのはorder-md -->
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-5 col-sm-5 col-xs-5 list-column1">
+        <% @items.each do |item| %>
+          <div class="item-pic">
+            <p><%= image_tag item.image.url(:thumb) %></p>
+          </div>
+          <div class="item-pic-title">
+          <p><%= item.name %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-2 col-sm-2 .d-none.d-md-block list-column2">
+        <% @items.each do |item| %>
+        <%# <div class="item-description-title"> %>
+
+                <div class="hospital-time">
+                <%= item.showlist1 %>
+                </div>
+  
+                <div class="hospital-do">
+                <%= item.showlistmiddle %>
+                </div>
+  
+                <div class="hospital-delete">
+                <%= item.showlistbottom %>
+                </div>
+
+
+
+
+
+
+        <%# </div> %>
+        <% end %>
+      </div>
+
+
+      <div class="col-md-5 col-sm-5 .d-none.d-md-block list-column3">
+          <% @items.each do |item| %>
+            <div class="item-description">
+
+                <div class="hospital-time">
+                <%= item.hostime %>
+                </div>
+  
+                <div class="hospital-do">
+                <%= item.description %>
+                </div>
+  
+                <div class="hospital-link">
+                <a href="<%= item.hoslink %>"><%= item.hoslink %></a>
+                </div>
+
+            </div>
+
+            <div class="item-description">
+                <%= link_to '削除', "/items/#{item.id}", method: :delete, data: {confirm: "削除しますか?"}  %>
+
+            </div>
+
+          <% end %>
+      </div>
+
+
+      </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<footer>
+   <p>&copy; 2020 My Portfolio All rights resrved</p>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% else %>
+
+ <%# <% @items.each do |item| %> 
+
+
+<div class='signinPage'>
+  <div class='container'>
+    <div class='userIcon'>
+
+    <div class="login">
+      <p><%= link_to "ログイン", new_user_session_path, class: 'loginBtn'%></p>
+    </div>
+
+    <div class="signin">
+      <p><%= link_to "新規登録", new_user_registration_path, class: 'signinBtn' %><p>
+    </div>
+
+    <div class="guestlogin">
+      <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, {method: :post, class: 'guestloginBtn'} %>
+    </div>
+
+  </div>
+</div>
+
+
+<% end %>
